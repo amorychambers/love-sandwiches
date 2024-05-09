@@ -109,6 +109,18 @@ def calculate_stock_data(data):
         new_stock_data.append(round(stock_num))
     return new_stock_data
 
+def get_stock_values(data):
+    """
+    Retrieves data from the stock worksheet to display the column headings and the latest row 
+    added to the worksheet
+    """
+    
+    headings = SHEET.worksheet('stock').row_values(1)
+    stock_dict = {headings[n]:data[n] for n in range(6)}
+    return stock_dict
+    
+
+
 def main():
     """
     Run all program functions
@@ -121,6 +133,7 @@ def main():
     sales_columns = get_last_entries()
     stock_data = calculate_stock_data(sales_columns)
     update_worksheet(stock_data, 'stock')
+    get_stock_values(stock_data)
 
 print("Welcome to Love Sandwiches Data Automation")
 main()
